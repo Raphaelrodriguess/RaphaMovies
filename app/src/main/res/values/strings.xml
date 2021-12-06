@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">RaphaMovies</string>
+    <string name="title_home">Home</string>
+    <string name="title_my_list">My List</string>
+    <string name="search_hint">Search by title.</string>
+    <string name="search_no_results">No results.</string>
+    <string name="title_search">Search</string>
+    <string name="my_list_at_details">My List</string>
+    <string name="learn_more">Learn More</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <!--    <string name="top_trending_button_play_trailer"><![CDATA[<h2>▶</h2> Trailer]]></string>-->
+    <string name="top_trending_button_play_trailer">Trailer</string>
+
+    <string name="no_video_to_show">No video to show</string>
+    <string name="database_item_not_removed">Could not remove from My List</string>
+    <string name="database_item_not_inserted">Could not add to My List</string>
+    <string name="stream_search_google">Where to watch</string>
+
+    <string name="rate_play_store_popup_title">Finding some nice movies?</string>
+    <string name="rate_play_store_message">Your rating is important for us!</string>
+    <string name="rate_play_store_btn_dont_show_again">Don\'t show again</string>
+    <string name="rate_play_store_btn_later">Do it later</string>
+    <string name="rate_play_store_btn_rate">Rate app</string>
+    <string name="play_store_uri">market://details?id=com.movies.raphamovies</string>
+
+</resources>

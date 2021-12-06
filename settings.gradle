@@ -1,0 +1,4 @@
+rootProject.name = "RaphaMovies"
+include ':app'
+
+

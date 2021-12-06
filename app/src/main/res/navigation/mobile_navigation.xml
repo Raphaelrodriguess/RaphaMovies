@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.raphamovies.ui.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@transition/slide_in_right"
+            app:popExitAnim="@transition/slide_out_right"
+            app:popEnterAnim="@transition/pop_enter_stay"/>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.raphamovies.ui.details.DetailsFragment"
+        android:label="DetailsFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detailsFragment_self"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@transition/slide_in_right"
+            app:popExitAnim="@transition/slide_out_right" />
+        <action
+            android:id="@+id/action_detailsFragment_toPersonDetailFragment"
+            app:destination="@id/personDetailsFragment"
+            app:enterAnim="@transition/slide_in_right"
+            app:popExitAnim="@transition/slide_out_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="com.example.raphamovies.ui.cast.PersonDetailsFragment"
+        android:label="DetailsFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_personDetailsFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@transition/slide_in_right"
+            app:popExitAnim="@transition/slide_out_right" />
+    </fragment>
+
+
+
+</navigation>
