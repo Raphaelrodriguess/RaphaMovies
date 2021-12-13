@@ -12,7 +12,7 @@ fun Details.openYoutube(context: Context?) {
         if (!this.videos.isNullOrEmpty() && !this.videos[0].key.isNullOrEmpty()) {
             val webIntent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("http://www.youtube.com/watch?v=${this.videos[0].key}")
+                Uri.parse("https://www.youtube.com/watch?v=${this.videos[0].key}")
             )
             context.startActivity(webIntent)
         } else {

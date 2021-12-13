@@ -6,22 +6,6 @@ import com.example.raphamovies.dto.CrewDTO
 import com.example.raphamovies.network.model.dto.DetailsDTO
 
 
-fun ArrayList<CrewDTO>.toCastDTO(): List<CastDTO> {
-    return this.map { crewDTO ->
-        CastDTO(
-            id = crewDTO.id,
-            name = crewDTO.name,
-            character = crewDTO.job,
-            creditId = crewDTO.creditId,
-            gender = crewDTO.gender,
-            castId = null,
-            order = null,
-            profilePath = crewDTO.profilePath
-        )
-    }
-}
-
-
 fun DetailsDTO.toDetails(): Details {
     return with(this) {
         Details(
@@ -34,8 +18,23 @@ fun DetailsDTO.toDetails(): Details {
             runtime = runtime.toString(),
             title = title,
             vote_average =voteAverage,
-            videos = videos?.results,
+            videos = video?.results,
             casts = casts
+        )
+    }
+}
+
+fun ArrayList<CrewDTO>.toCastDTO(): List<CastDTO> {
+    return this.map { crewDTO ->
+        CastDTO(
+            id = crewDTO.id,
+            name = crewDTO.name,
+            character = crewDTO.job,
+            creditId = crewDTO.creditId,
+            gender = crewDTO.gender,
+            castId = null,
+            order = null,
+            profilePath = crewDTO.profilePath
         )
     }
 }

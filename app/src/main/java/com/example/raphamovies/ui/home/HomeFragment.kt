@@ -84,4 +84,5 @@ class HomeFragment : Fragment(), OnMovieClick {
         findNavController().navigate(homeToDetailsFragment)
     }
 
+
 }

@@ -11,6 +11,8 @@ import com.example.raphamovies.appConstants
 import com.example.raphamovies.di.MainDispatcher
 import com.example.raphamovies.domainmappers.toDetails
 import com.example.raphamovies.domainmodel.Details
+import com.example.raphamovies.dto.CastDTO
+import com.example.raphamovies.dto.CastsDTO
 import com.example.raphamovies.network.NetworkResponse
 import com.example.raphamovies.network.TmdbApi
 import com.example.raphamovies.network.model.dto.MovieDTO
@@ -19,16 +21,16 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DetailsViewModel @Inject constructor(val context: Context, private val tmdbApi: TmdbApi, @MainDispatcher val mainDispatcher: CoroutineDispatcher) : ViewModel(){
+class DetailsViewModel @Inject constructor(val context: Context, private val tmdbApi: TmdbApi, @MainDispatcher val mainDispatcher: CoroutineDispatcher) : ViewModel() {
 
     private val _movie: MutableLiveData<Details> = MutableLiveData()
     val movie: LiveData<Details> = _movie
 
-    private val _recommendedMovies: MutableLiveData<List<MovieDTO>> = MutableLiveData()
-    val recommendedMovies: LiveData<List<MovieDTO>> = _recommendedMovies
-
     private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
     val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _video: MutableLiveData<List<VideoDTO>> = MutableLiveData()
+    val video: LiveData<List<VideoDTO>> = _video
 
     fun getDetails(id: Int) {
         _isLoading.value = true
@@ -38,6 +40,8 @@ class DetailsViewModel @Inject constructor(val context: Context, private val tmd
                 is NetworkResponse.Success -> {
                     val details = response.body.toDetails()
                     _movie.value = details
+                    val video = response.body.video.results
+                    _video.value = video
 
                 }
                 is NetworkResponse.ApiError -> Log.d(
@@ -49,22 +53,6 @@ class DetailsViewModel @Inject constructor(val context: Context, private val tmd
             }
         }
     }
-
-
-
-
-
-//    private fun filterResultsList(list: Collection<DomainMovie>) {
-//        val list = ArrayList<MovieDTO>()
-//        list.addAll(t.results)
-//
-//        if (list.size == 20) {
-//            val last = list.size - 1
-//            val beforeLast = list.size - 2
-//            list.remove()
-//            list.removeAt(beforeLast)
-//        }
-//            _recommendedMovies.value = list
-//    }
-
 }
+
+

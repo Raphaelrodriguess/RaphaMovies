@@ -45,7 +45,7 @@ data class DetailsDTO(
     @SerializedName("title")
     val title: String,
     @SerializedName("videos")
-    val videos: VideosDTO,
+    val video: VideosDTO,
     @SerializedName("vote_average")
     val voteAverage: Double,
     @SerializedName("vote_count")

@@ -25,10 +25,6 @@ data class Details(
     init {
         release_date = release_date?.subSequence(0, 4).toString()
 
-        val trailer = getTrailer()
-        videos?.clear()
-        trailer?.let { videos?.add(it) }
-
         formatCastsArray()
         formattedCasts = formatCasts(casts)
         formattedDirector = formatDirector(casts)
@@ -91,33 +87,6 @@ data class Details(
 
     }
 
-    private fun getTrailer(): VideoDTO? {
-        var trailer: VideoDTO? = null
-
-        videos?.forEach { video ->
-            val name = video.name?.toLowerCase()
-            if (name != null) {
-                if (name.contains("Official Trailer"))
-                    trailer = video
-            }
-        }
-
-        if (trailer == null) {
-            videos?.forEach { video ->
-                val name = video.name?.toLowerCase()
-                if (name != null) {
-                    if (name.contains("trailer"))
-                        trailer = video
-                }
-            }
-        }
-
-        if (trailer == null)
-            if (!videos.isNullOrEmpty())
-                trailer = videos[0]
-
-        return trailer
-    }
 }
 
 

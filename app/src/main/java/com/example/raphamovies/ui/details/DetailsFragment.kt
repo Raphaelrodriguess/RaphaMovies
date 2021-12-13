@@ -15,22 +15,22 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.raphamovies.appConstants
 import com.example.raphamovies.viewmodel.DetailsViewModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_details.*
 import java.lang.Exception
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.raphamovies.MainActivity
 import com.example.raphamovies.R
 import com.example.raphamovies.databinding.FragmentDetailsBinding
+import com.example.raphamovies.domainmappers.toCastDTO
 import com.example.raphamovies.domainmodel.Details
+import com.example.raphamovies.dto.CastsDTO
 import com.example.raphamovies.openYoutube
-import com.example.raphamovies.ui.GridAdapter
 import com.example.raphamovies.ui.OnMovieClick
-
+import com.movies.raphamovies.ui.details.CastsAdapter
 
 
 import javax.inject.Inject
@@ -39,11 +39,9 @@ import javax.inject.Inject
 class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
     //    lateinit var viewModel: DetailsViewModel
     private lateinit var binding: FragmentDetailsBinding
-    private var castsAdapter: CastsAdapter? = null
-    private var gridAdapter: GridAdapter? = null
     private var details: Details? = null
-
     private val args: DetailsFragmentArgs by navArgs()
+    private var castsAdapter: CastsAdapter? = null
 
     // Dagger code
     @Inject
@@ -64,13 +62,11 @@ class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        setupAdapters()
+        attachObservers()
         setupClickListeners()
+        setupAdapters()
 
         viewModel.getDetails(args.id)
-
-
-
 
         return binding.root
     }
@@ -81,56 +77,45 @@ class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
 
     private fun attachObservers() {
         attachMovieObserver()
-        attachRecommendedObserver()
     }
 
     private fun attachMovieObserver() {
         viewModel.movie.observe(viewLifecycleOwner, Observer {
             details = it
             displayDetails(it)
+            setCastsList(it.casts)
         })
     }
 
-
-    private fun attachRecommendedObserver() {
-        viewModel.recommendedMovies.observe(viewLifecycleOwner, Observer { movies ->
-            if (movies.isNullOrEmpty()) {
-                binding.tvRecommendedEmpty.visibility = View.VISIBLE
-            } else {
-                binding.tvRecommendedEmpty.visibility = View.INVISIBLE
-            }
-            gridAdapter?.setList(movies)
-        })
-    }
-
-    private fun setupAdapters() {
-        setupRecommendedAdapter()
-        setupCastsAdapter()
-    }
 
     private fun setupClickListeners() {
         backdropClickListener()
     }
 
+    private fun backdropClickListener() {
+        binding.detailBackdrop.setOnClickListener {
+            details?.openYoutube(context)
+        }
+    }
 
-    private fun setupRecommendedAdapter() {
-        binding.rvRecommended.layoutManager =
-            GridLayoutManager(context, 3, GridLayoutManager.VERTICAL, false)
-        gridAdapter = GridAdapter(context, this, ArrayList())
-        binding.rvRecommended.adapter = gridAdapter
+    private fun setupAdapters() {
+        setupCastsAdapter()
     }
 
     private fun setupCastsAdapter() {
-        binding.rvCasts.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvCasts.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         castsAdapter = CastsAdapter(context, this, ArrayList())
         binding.rvCasts.adapter = castsAdapter
     }
 
-
-    private fun backdropClickListener() {
-        binding.detailBackdrop.setOnClickListener {
-            details?.openYoutube(context)
+    private fun setCastsList(casts: CastsDTO?) {
+        casts?.let { cast ->
+            cast.cast?.let { actors ->
+                castsAdapter?.setList(actors)
+            }
+            cast.crew?.let { crew ->
+                castsAdapter?.addToList(crew.toCastDTO())
+            }
         }
     }
 
@@ -144,8 +129,8 @@ class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
                 .into(detail_backdrop, object : Callback {
                     override fun onSuccess() {
 
-                    }
 
+                    }
                     override fun onError(e: Exception?) {
                         Toast.makeText(context, "Error loading image", Toast.LENGTH_LONG)
                             .show()
@@ -157,7 +142,7 @@ class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
 
     override fun onClick(id: Int) {
         if (id != 0) {
-            Log.d("clickgrid", "HomeFragment, onItemClick, id = $id")
+            Log.d("click", "HomeFragment, onItemClick, id = $id")
             val detailsToDetailsFragment = DetailsFragmentDirections.actionDetailsFragmentSelf(id)
             findNavController().navigate(detailsToDetailsFragment)
         } else {
@@ -166,15 +151,12 @@ class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
 
     }
 
+
+
     override fun onCastClick(id: Int) {
-        if (id != 0) {
-            Log.d("clickgrid", "HomeFragment, onItemClick, id = $id")
-            val detailsToPersonDetailsFragment = DetailsFragmentDirections.actionDetailsFragmentToPersonDetailFragment(id)
-            findNavController().navigate(detailsToPersonDetailsFragment)
-        } else {
-            Toast.makeText(context, "Sorry. Can not load this movie. :/", Toast.LENGTH_SHORT).show()
-        }
+        TODO("Not yet implemented")
     }
+
 
 }
 

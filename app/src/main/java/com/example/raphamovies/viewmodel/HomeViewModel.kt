@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.raphamovies.appConstants
 import com.example.raphamovies.di.IoDispatcher
+import com.example.raphamovies.domainmodel.Details
 import com.example.raphamovies.network.NetworkResponse
 import com.example.raphamovies.network.model.dto.MovieDTO
 import com.example.raphamovies.repository.HomeDataSource
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val homeDataSource: HomeDataSource, @IoDispatcher private val dispatcher: CoroutineDispatcher): ViewModel() {
+
     private val _listsOfMovies: MutableLiveData<List<List<MovieDTO>>>? = MutableLiveData()
     val listsOfMovies: LiveData<List<List<MovieDTO>>>? = _listsOfMovies
 
@@ -26,12 +28,6 @@ class HomeViewModel @Inject constructor(private val homeDataSource: HomeDataSour
 
     private val _isLoading: MutableLiveData<Boolean>? = MutableLiveData()
     val isLoading: LiveData<Boolean>? = _isLoading
-
-    private val _topTrendingMovie: MutableLiveData<Call.Details>? = MutableLiveData()
-    val topTrendingMovie: LiveData<Call.Details>? = _topTrendingMovie
-
-    private val _isInDatabase: MutableLiveData<Boolean> = MutableLiveData()
-    val isInDatabase: LiveData<Boolean> = _isInDatabase
 
     private var _errorScreenVisibility = MutableLiveData<Boolean>(false)
     var errorScreenVisibility: LiveData<Boolean> = _errorScreenVisibility
