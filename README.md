@@ -7,9 +7,9 @@ Tecnologias utilizadas:
 
 Kotlin<br>
 MVVM <br> 
-Consumo de API (Coroutines + Retrofit)<br>
-Okhttp<br>
-Gson<br>
+Retrofit<br>
+Coroutines<br>![tmdb_raphamovies](https://user-images.githubusercontent.com/77521831/145758088-7ced2d7d-978c-460f-8479-b9e675a6a4aa.PNG)
+
 Picasso<br>
 LiveData<br>
 ViewModel<br>
