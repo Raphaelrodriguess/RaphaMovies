@@ -31,9 +31,8 @@ import com.example.raphamovies.dto.CastsDTO
 import com.example.raphamovies.openYoutube
 import com.example.raphamovies.ui.OnMovieClick
 import com.movies.raphamovies.ui.details.CastsAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-import javax.inject.Inject
 
 
 class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
@@ -43,14 +42,7 @@ class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
     private val args: DetailsFragmentArgs by navArgs()
     private var castsAdapter: CastsAdapter? = null
 
-    // Dagger code
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<DetailsViewModel> { viewModelFactory }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity() as MainActivity).mainComponent.inject(this)
-    }
+    private val  viewModel : DetailsViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

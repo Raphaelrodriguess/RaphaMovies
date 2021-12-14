@@ -7,14 +7,14 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 
-class HiltAplication : Application() {
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
         startKoin{
 
-            androidContext(this@HiltAplication)
+            androidContext(this@App)
 
             modules(listOf(viewModelModule, networkModule))
         }
