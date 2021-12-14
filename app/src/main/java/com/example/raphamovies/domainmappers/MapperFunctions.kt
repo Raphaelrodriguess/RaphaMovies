@@ -5,6 +5,7 @@ import com.example.raphamovies.dto.CastDTO
 import com.example.raphamovies.dto.CrewDTO
 import com.example.raphamovies.network.model.dto.DetailsDTO
 
+
 fun DetailsDTO.toDetails(): Details {
     return with(this) {
         Details(
@@ -36,9 +37,4 @@ fun ArrayList<CrewDTO>.toCastDTO(): List<CastDTO> {
             profilePath = crewDTO.profilePath
         )
     }
-
 }
-
-
-
-

@@ -9,27 +9,7 @@ import androidx.databinding.BindingAdapter
 import kotlin.math.floor
 
 object BindingAdapters {
-    @JvmStatic
-    @BindingAdapter("srcIcon")
-    fun changeSourceIcon(imageView: ImageView, isInDatabase: Boolean) {
-        if (isInDatabase) {
-            imageView.setImageDrawable(
-                ResourcesCompat.getDrawable(
-                    imageView.context.resources,
-                    R.drawable.ic_check_mark_24dp,
-                    null
-                )
-            )
-        } else {
-            imageView.setImageDrawable(
-                ResourcesCompat.getDrawable(
-                    imageView.context.resources,
-                    R.drawable.wish_list_btn_24dp,
-                    null
-                )
-            )
-        }
-    }
+
 
     @JvmStatic
     @BindingAdapter("isVisible")

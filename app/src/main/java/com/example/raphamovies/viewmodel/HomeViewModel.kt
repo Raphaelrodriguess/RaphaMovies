@@ -1,23 +1,22 @@
 package com.example.raphamovies.viewmodel
 
+import android.telecom.Call
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.raphamovies.appConstants
+import com.example.raphamovies.di.IoDispatcher
+import com.example.raphamovies.domainmodel.Details
 import com.example.raphamovies.network.NetworkResponse
 import com.example.raphamovies.network.model.dto.MovieDTO
 import com.example.raphamovies.repository.HomeDataSource
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
+import javax.inject.Inject
 
+class HomeViewModel @Inject constructor(private val homeDataSource: HomeDataSource, @IoDispatcher private val dispatcher: CoroutineDispatcher): ViewModel() {
 
-class HomeViewModel  (private val homeDataSource: HomeDataSource): ViewModel(),
-    CoroutineScope {
-    override val coroutineContext: CoroutineContext = Dispatchers.IO
     private val _listsOfMovies: MutableLiveData<List<List<MovieDTO>>>? = MutableLiveData()
     val listsOfMovies: LiveData<List<List<MovieDTO>>>? = _listsOfMovies
 
@@ -40,8 +39,8 @@ class HomeViewModel  (private val homeDataSource: HomeDataSource): ViewModel(),
     fun getListsOfMovies() {
         showErrorMessage(false)
         try {
-            viewModelScope.launch() {
-                homeDataSource.getListsOfMovies(Dispatchers.IO) { result ->
+            viewModelScope.launch(dispatcher) {
+                homeDataSource.getListsOfMovies(dispatcher) { result ->
                     when (result) {
                         is NetworkResponse.Success -> {
                             _listsOfMovies?.postValue(result.body)
@@ -73,4 +72,3 @@ class HomeViewModel  (private val homeDataSource: HomeDataSource): ViewModel(),
         _errorMessage?.postValue(message)
     }
 }
-

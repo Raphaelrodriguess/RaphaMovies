@@ -15,13 +15,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.raphamovies.appConstants
 import com.example.raphamovies.viewmodel.DetailsViewModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_details.*
 import java.lang.Exception
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.raphamovies.MainActivity
 import com.example.raphamovies.R
 import com.example.raphamovies.databinding.FragmentDetailsBinding
 import com.example.raphamovies.domainmappers.toCastDTO
@@ -30,15 +31,27 @@ import com.example.raphamovies.dto.CastsDTO
 import com.example.raphamovies.openYoutube
 import com.example.raphamovies.ui.OnMovieClick
 import com.movies.raphamovies.ui.details.CastsAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+
+
+import javax.inject.Inject
+
 
 class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
     //    lateinit var viewModel: DetailsViewModel
     private lateinit var binding: FragmentDetailsBinding
     private var details: Details? = null
     private val args: DetailsFragmentArgs by navArgs()
-    private val viewModel : DetailsViewModel by viewModel()
     private var castsAdapter: CastsAdapter? = null
+
+    // Dagger code
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<DetailsViewModel> { viewModelFactory }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity() as MainActivity).mainComponent.inject(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,9 +92,6 @@ class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
         backdropClickListener()
     }
 
-
-
-
     private fun backdropClickListener() {
         binding.detailBackdrop.setOnClickListener {
             details?.openYoutube(context)
@@ -109,7 +119,6 @@ class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
         }
     }
 
-
     private fun displayDetails(details: Details?) {
         details?.apply {
             val imagePath = backdrop_path ?: poster_path
@@ -133,7 +142,7 @@ class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
 
     override fun onClick(id: Int) {
         if (id != 0) {
-            Log.d("clickgrid", "HomeFragment, onItemClick, id = $id")
+            Log.d("click", "HomeFragment, onItemClick, id = $id")
             val detailsToDetailsFragment = DetailsFragmentDirections.actionDetailsFragmentSelf(id)
             findNavController().navigate(detailsToDetailsFragment)
         } else {
@@ -141,6 +150,8 @@ class DetailsFragment : Fragment(), OnMovieClick, OnCastClick {
         }
 
     }
+
+
 
     override fun onCastClick(id: Int) {
         TODO("Not yet implemented")
