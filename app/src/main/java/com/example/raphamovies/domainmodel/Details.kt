@@ -103,7 +103,7 @@ data class Details(
         }
 
         if (trailer == null) {
-            videos?.forEach { video ->
+            videos?.forEach { video->
                 val name = video.name?.toLowerCase()
                 if (name != null) {
                     if (name.contains("trailer"))

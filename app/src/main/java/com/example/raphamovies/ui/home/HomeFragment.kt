@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.raphamovies.R
 import com.example.raphamovies.viewmodel.HomeViewModel
@@ -16,18 +15,13 @@ import com.example.raphamovies.databinding.HomeFragmentBinding
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.raphamovies.MainActivity
-import javax.inject.Inject
+import com.example.raphamovies.di.viewModelModule
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HomeFragment : Fragment(), OnMovieClick {
 
-    @Inject
-    lateinit var  viewModelFactory: ViewModelProvider.Factory
-    private val  viewModel by viewModels<HomeViewModel> { viewModelFactory }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity() as MainActivity).mainComponent.inject(this)
-    }
+    private val  viewModel : HomeViewModel by viewModel()
 
     private lateinit var binding: HomeFragmentBinding
 
@@ -83,5 +77,6 @@ class HomeFragment : Fragment(), OnMovieClick {
             HomeFragmentDirections.actionNavigationHomeToDetailsFragment(id)
         findNavController().navigate(homeToDetailsFragment)
     }
+
 
 }

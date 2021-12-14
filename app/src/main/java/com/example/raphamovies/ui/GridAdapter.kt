@@ -68,11 +68,6 @@ class GridAdapter(
 
     }
 
-    fun setList(list: List<MovieDTO>) {
-        Log.d("grid-log", "setList() called")
-        this.list = list
-        notifyDataSetChanged()
-    }
 }
 
 class RecommendedHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

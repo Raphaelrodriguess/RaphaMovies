@@ -5,15 +5,19 @@
       <map>
         <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/add_to_my_list.xml" value="0.1359375" />
+        <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/button_top_trending_trailer.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/dialogo_avalia_play_store.xml" value="0.1359375" />
-        <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/fragment_details.xml" value="0.1" />
+        <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/fragment_details.xml" value="0.33" />
         <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/fragment_mylist.xml" value="0.25" />
         <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/fragment_person_details.xml" value="0.14010416666666667" />
-        <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/home_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/home_fragment.xml" value="0.11855670103092783" />
         <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/layout_error.xml" value="0.1" />
         <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/layout_loading_home.xml" value="0.1" />
         <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/list_item_movie.xml" value="0.1" />
         <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/list_item_rv_movies.xml" value="0.1" />
+        <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies/app/src/main/res/layout/top_trending_trailler.xml" value="0.33" />
+        <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies2/app/src/main/res/drawable/ic_check_mark_24dp.xml" value="0.134375" />
+        <entry key="..\:/Users/ONS/AndroidStudioProjects/RaphaMovies2/app/src/main/res/layout/fragment_details.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

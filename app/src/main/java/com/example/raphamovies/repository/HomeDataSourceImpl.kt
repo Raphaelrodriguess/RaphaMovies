@@ -9,12 +9,12 @@ import com.example.raphamovies.network.model.dto.MovieResponseDTO
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import org.koin.java.KoinJavaComponent.inject
 import java.io.IOException
-import javax.inject.Inject
 
 
 
-class HomeDataSourceImpl @Inject constructor(private val tmdbApi: TmdbApi) : HomeDataSource {
+class HomeDataSourceImpl constructor( private val tmdbApi: TmdbApi) : HomeDataSource {
     override suspend fun getListsOfMovies(
         dispatcher: CoroutineDispatcher,
         homeResultCallback: ( result : NetworkResponse<List<List<MovieDTO>>, ErrorResponse>) -> Unit

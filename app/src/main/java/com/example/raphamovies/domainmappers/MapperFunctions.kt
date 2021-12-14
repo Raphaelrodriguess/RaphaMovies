@@ -5,6 +5,23 @@ import com.example.raphamovies.dto.CastDTO
 import com.example.raphamovies.dto.CrewDTO
 import com.example.raphamovies.network.model.dto.DetailsDTO
 
+fun DetailsDTO.toDetails(): Details {
+    return with(this) {
+        Details(
+            backdrop_path = backdropPath,
+            genres = genres,
+            id = id,
+            overview = overview,
+            poster_path = posterPath.toString(),
+            release_date = releaseDate,
+            runtime = runtime.toString(),
+            title = title,
+            vote_average =voteAverage,
+            videos = video?.results,
+            casts = casts
+        )
+    }
+}
 
 fun ArrayList<CrewDTO>.toCastDTO(): List<CastDTO> {
     return this.map { crewDTO ->
@@ -19,23 +36,9 @@ fun ArrayList<CrewDTO>.toCastDTO(): List<CastDTO> {
             profilePath = crewDTO.profilePath
         )
     }
+
 }
 
 
-fun DetailsDTO.toDetails(): Details {
-    return with(this) {
-        Details(
-            backdrop_path = backdropPath,
-            genres = genres,
-            id = id,
-            overview = overview,
-            poster_path = posterPath.toString(),
-            release_date = releaseDate,
-            runtime = runtime.toString(),
-            title = title,
-            vote_average =voteAverage,
-            videos = videos?.results,
-            casts = casts
-        )
-    }
-}
+
+
