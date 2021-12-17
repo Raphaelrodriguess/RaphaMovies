@@ -48,18 +48,4 @@ interface TmdbApi {
         append: String? = null
     ): NetworkResponse<DetailsDTO, Error>
 
-
-    @GET("person/{person_id}")
-    fun getPerson(@Path("person_id") person_id: Int): Call<PersonDetails>
-
-    @GET("discover/movie")
-    fun getActorsMovies(
-        @Query("with_cast")
-        id: Int,
-        @Query("language")
-        language: String,
-        @Query("include_adult")
-        adult: Boolean
-    ): Call<MovieResponseDTO>
-
 }
