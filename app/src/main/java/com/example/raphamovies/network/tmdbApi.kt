@@ -1,6 +1,5 @@
 package com.example.raphamovies.network
 
-import com.example.raphamovies.dto.PersonDetails
 import com.example.raphamovies.network.model.dto.DetailsDTO
 import com.example.raphamovies.network.model.dto.MovieResponseDTO
 import retrofit2.Call
